@@ -5,8 +5,11 @@ import {
     // ctti_personal_session,
     ctti_slide4,
     ctti_slide2,
-    ctti_home_traing,
+    // ctti_home_traing,
     ctti_itil_foundation,
+    ctti_biz_leadership,
+    ctti_personal_session,
+    niit_swift_student,
 } from '../assets/images'
 
 type SlideProps = {
@@ -24,7 +27,7 @@ export const slides: SlideProps[]  = [
         text: "Dive into the digital age with CTTI's top-tier IT courses. Experience unparalleled learning that bridges theory and practical application, setting you on the path to success.",
         link: "/about", 
         tag: "Get Started",
-        image: ctti_home_traing,
+        image: niit_swift_student,
     },
     {   id: 122,
         title: "Learn Today's Skills for Tomorrow's Tech Innovations",
@@ -38,13 +41,13 @@ export const slides: SlideProps[]  = [
         text: "Embrace the power of choice with our Virtual and Blended Learning options. Tailor your education to fit your lifestyle and open doors to global IT opportunities.",
         link: "/courses", 
         tag: "Enroll Now",
-        image: ctti_slide2,
+        image: ctti_biz_leadership                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ,
     },
     {   id: 124,
         title: "From Learning to Earning: Your IT Career Awaits!",
         text: "With CTTI, the journey from learning to professional growth is seamless. Unlock a world of industry opportunities and thrive in your dream IT career post-training.",
         link: "/courses", 
         tag: "Learn Now",
-        image: ctti_coder,
+        image: ctti_personal_session,
     },
 ]

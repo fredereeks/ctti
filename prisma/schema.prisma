@@ -46,7 +46,7 @@ model Category {
   @@unique([name])
 }
 
-model Contact {
+model ContactMessage {
   id         String     @id @default(cuid())
   firstname  String
   middlename String?
@@ -55,7 +55,7 @@ model Contact {
   phone      String
   country    String?
   state      String?
-  message    String
+  message    String     @db.LongText()
   status     ReadStatus @default(Unread)
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @default(now()) @updatedAt
@@ -113,7 +113,7 @@ model Enquiry {
   phone      String?
   image      String?
   type       UserType   @default(User)
-  message    String     @db.MediumText()
+  message    String     @db.LongText()
   country    String?
   state      String?
   status     ReadStatus @default(Unread)

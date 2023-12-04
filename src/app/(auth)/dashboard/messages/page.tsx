@@ -27,7 +27,7 @@ const sendMessage = async (data: FormData) => {
     // const contactMessage = await prisma.contact.create({data: {
     //     firstname, lastname, email, phone: phone || null, message
     // }})
-    await prisma.contact.create({
+    await prisma.contactMessage.create({
       data: {
           firstname, middlename, lastname, phone, country, state, message, email
       }
@@ -88,7 +88,7 @@ const sendMessage = async (data: FormData) => {
 
 
 const fetchMessages = async() => {
-    const messages = await prisma.contact.findMany()
+    const messages = await prisma.contactMessage.findMany()
     return messages as MessageProps[]
 }
 

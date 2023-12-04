@@ -6,11 +6,12 @@ import flags from 'react-phone-number-input/flags';
 import 'react-phone-number-input/style.css'
 import toast from 'react-hot-toast';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
+import { handleContactMessage } from '@/actions';
 
 
 
 
-export default function ContactForm({ handleSubmit }: { handleSubmit: (data: FormData) => Promise<{ message: string, error: boolean } | undefined> }) {
+export default function ContactForm() {
     const formRef = useRef<HTMLFormElement | null>(null)
     const [pending, setPending] = useState<boolean>(false)
     const [phone, setPhone] = useState<string | undefined>('')
@@ -25,7 +26,7 @@ export default function ContactForm({ handleSubmit }: { handleSubmit: (data: For
         }
             setPending(true)
         try {
-            const data = await handleSubmit(formData);
+            const data = await handleContactMessage(formData);
             if (data?.error) {
                 toast.error(data?.message, { id: "86249" })
                 formRef?.current?.reset();
