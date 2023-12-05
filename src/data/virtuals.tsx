@@ -1,5 +1,5 @@
 // import {FaTerminal, FaRegAddressCard} from 'react-icons/fa'
-import {IoLibraryOutline, IoBusOutline, IoPawOutline, IoMicOutline, IoFilmOutline, IoGlobeOutline, IoTerminalOutline, IoTicketOutline, IoShield} from 'react-icons/io5'
+import {IoLibraryOutline, IoBusOutline, IoPawOutline, IoMicOutline, IoFilmOutline, IoGlobeOutline, IoTerminalOutline, IoTicketOutline, IoShield} from 'react-icons/io5/index'
 
 export const virtuals: VirtualCardProps[] = [
     {

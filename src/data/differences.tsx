@@ -1,4 +1,4 @@
-import { FaGraduationCap, FaBrain, FaBookReader, FaArchway } from 'react-icons/fa'
+import { FaGraduationCap, FaBrain, FaBookReader, FaArchway } from 'react-icons/fa/index'
 
 export const differences: DifferencesProps[] = [
     {

@@ -1,5 +1,5 @@
-import {FaBriefcase, FaBuilding, FaCloudMeatball,  FaMicrosoft, FaNetworkWired, FaPalette, FaDatabase, FaProjectDiagram} from 'react-icons/fa' 
-import {IoIosTrendingUp, IoIosCode, IoIosLaptop, } from 'react-icons/io' 
+import {FaBriefcase, FaBuilding, FaCloudMeatball,  FaMicrosoft, FaNetworkWired, FaPalette, FaDatabase, FaProjectDiagram} from 'react-icons/fa/index' 
+import {IoIosTrendingUp, IoIosCode, IoIosLaptop, } from 'react-icons/io/index' 
 
 export const categories: CategoryProps[] = [
     {

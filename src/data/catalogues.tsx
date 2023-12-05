@@ -1,6 +1,6 @@
 // import { blog_slider1, blog_slider2, blog_slider3, masonry2, masonry4, masonry6, masonry8 } from '../assets/images'
-import {FaBriefcase, FaBuilding, FaCloudMeatball,  FaDatabase,  FaMicrosoft, FaNetworkWired, FaPalette, FaProjectDiagram} from 'react-icons/fa' 
-import {IoIosAnalytics, IoIosCode, IoIosCodeDownload} from 'react-icons/io' 
+import {FaBriefcase, FaBuilding, FaCloudMeatball,  FaDatabase,  FaMicrosoft, FaNetworkWired, FaPalette, FaProjectDiagram} from 'react-icons/fa/index' 
+import {IoIosAnalytics, IoIosCode, IoIosCodeDownload} from 'react-icons/io/index' 
 
 export const catalogues: CatalogueProps[] = [
     {

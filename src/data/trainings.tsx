@@ -1,4 +1,4 @@
-import { FaAddressCard, FaBalanceScaleRight, FaHandHoldingHeart, FaNetworkWired, FaPalette, FaPaperPlane } from "react-icons/fa";
+import { FaAddressCard, FaBalanceScaleRight, FaHandHoldingHeart, FaNetworkWired, FaPalette, FaPaperPlane } from "react-icons/fa/index";
 
 export const trainings: TrainingCardProps[] = [
     {

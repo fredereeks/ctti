@@ -1,7 +1,5 @@
-import { FaBriefcase, FaIdCard, FaPiggyBank } from 'react-icons/fa'
-import { FaSackDollar } from 'react-icons/fa6'
-import { MdAccountBalance, MdAccountBalanceWallet, MdAttachMoney, MdLibraryBooks, MdQuestionAnswer } from 'react-icons/md'
-import {  IoClipboardOutline, IoMailUnreadOutline, IoNewspaperOutline, IoPeopleOutline, IoReceiptOutline } from 'react-icons/io5'
+import { MdLibraryBooks, MdQuestionAnswer } from 'react-icons/md/index'
+import {  IoClipboardOutline, IoMailUnreadOutline, IoNewspaperOutline, IoPeopleOutline, IoReceiptOutline } from 'react-icons/io5/index'
 
 type NavLinkProps = {
     id: number, title: string, link: string, element: JSX.Element, icon: JSX.Element
