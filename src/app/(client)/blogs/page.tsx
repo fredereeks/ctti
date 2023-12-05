@@ -33,7 +33,6 @@ const fetchCourse = async() => {
 
 export default async function BlogsPage() {
     const courses = await fetchCourse()
-    console.log({courses})
     return (
         <main className='flex flex-col justify-center bg-white min-h-[60vh]'>
             <BreadCrumb page={"Blogs"} />

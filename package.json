@@ -4,11 +4,9 @@
   "private": true,
   "homepage": "https://ctti.ng/",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "prebuild": "node prebuild.ts",
-    "vercel-build": "prisma generate && next build",
     "build": "prisma generate && next build",
-    "export": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
