@@ -29,19 +29,19 @@ export default function LoginForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        toast.loading('Please wait while we send your request', { id: "82046" })
+        toast.loading('Please wait while we send your request', { id: "86249", duration: 5000 }) 
         setLoading(true)
         try {
             const email = emailRef?.current?.value, password = passwordRef?.current?.value
             const res = await signIn("credentials", { email, password, redirect: false })
-            // res.error ? toast.error(res.message, { id: "82046" }) : toast.success(res.message, { id: "82046" })
-            if (res?.ok) toast.success(`Welcome Back ${email}`, { id: "82046" })
+            // res.error ? toast.error(res.message, { id: "86249", duration: 5000 })  : toast.success(res.message, { id: "86249", duration: 5000 }) 
+            if (res?.ok) toast.success(`Welcome Back ${email}`, { id: "86249", duration: 5000 }) 
             else {
                 if(res?.error === "CredentialsSignin") toast.error("Invalid credentials supplied, please, try again", { id: "82046", duration: 4000 })
-                else toast.error(res?.error || "Invalid credentials supplied, please, try again", { id: "82046" })
+                else toast.error(res?.error || "Invalid credentials supplied, please, try again", { id: "86249", duration: 5000 }) 
             }
         } catch (error) {
-            toast.error('Unable to complete request, please, check your network and try again', { id: "82046" })
+            toast.error('Unable to complete request, please, check your network and try again', { id: "86249", duration: 5000 }) 
         }
         setLoading(false)
     }

@@ -27,7 +27,7 @@ export default function EnquiryList({ enquiryData }: { enquiryData: EnquiryProps
             previewRef.current?.showModal()
         }
         catch (err) {
-            toast.error(`Could not load this preview of this Enquiry`)
+            toast.error(`Could not load this preview of this Enquiry`, { id: "86249", duration: 5000 })
         }
     }
 

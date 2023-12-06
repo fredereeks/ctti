@@ -43,7 +43,7 @@ const targetBg = bg.find(el => el.id === id)?.background
           </span>
         </div>
         <h4 className={`${full ? 'text-lg md:text-xl' : 'text-xl'} font-bold text-slate-500 capitalize`}>{title}</h4>
-        <p className={`text-justify leading-loose ${full ? 'thin-text' : 'normal-text overflow-hidden text-ellipsis line-clamp-3'}`}>{text}</p>
+        <p className={`text-left md:text-justify leading-loose ${full ? 'thin-text' : 'normal-text overflow-hidden text-ellipsis line-clamp-3'}`}>{text}</p>
     </Link>
   )
 }

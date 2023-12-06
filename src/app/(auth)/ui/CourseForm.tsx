@@ -64,14 +64,14 @@ export default function CourseForm() {
         try {
             const data = await createCourse(formData);
             if (data?.error) {
-                toast.error(data?.message, { id: "86249" })
+                toast.error(data?.message, { id: "86249", duration: 5000 }) 
                 formRef?.current?.reset();
             } else {
-                toast.success(data?.message || "Message Sent", { id: "86249" })
+                toast.success(data?.message || "Message Sent", { id: "86249", duration: 5000 }) 
                 formRef?.current?.reset();
             }
         } catch (error) {
-            toast.error("Something went wrong. Please, try again", { id: "86249" })
+            toast.error("Something went wrong. Please, try again", { id: "86249", duration: 5000 }) 
         }
         setPending(false)
     }

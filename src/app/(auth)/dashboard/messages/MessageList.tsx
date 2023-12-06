@@ -33,7 +33,7 @@ export default function MessageList({ messageData, sendMessage }: MessageListPro
             modalRef.current?.showModal()
         }
         catch (err) {
-            toast.error(`Could not Show this Message. Check your Internet connection and try again`)
+            toast.error(`Could not Show this Message. Check your Internet connection and try again`, { id: "86249", duration: 5000 }) 
         }
     }
 
@@ -47,7 +47,7 @@ export default function MessageList({ messageData, sendMessage }: MessageListPro
             // replyRef.current?.showModal()
         }
         catch (err) {
-            toast.error(`Could not Send your reply. Check your Internet connection and try again`)
+            toast.error(`Could not Send your reply. Check your Internet connection and try again`, { id: "86249", duration: 5000 }) 
         }
     }
 
@@ -62,7 +62,7 @@ export default function MessageList({ messageData, sendMessage }: MessageListPro
             replyRef.current?.close()
         }
         catch (err) {
-            toast.error(`Sorry, we could not send your message. Please, check your network and try again`)
+            toast.error(`Sorry, we could not send your message. Please, check your network and try again`, { id: "86249", duration: 5000 }) 
         }
         setLoading(false)
     }

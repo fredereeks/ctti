@@ -19,13 +19,13 @@ export default function ProfileForm({ user }: { user: UserProps }) {
         try {
             const formData = new FormData(formRef?.current!)
             const res = await updateAccount(formData)
-            if (res?.error) toast.error(res.message, { id: "82046" })
+            if (res?.error) toast.error(res.message, { id: "86249", duration: 5000 }) 
             else {
-                toast.success(res.message, { id: "82046" })
+                toast.success(res.message, { id: "86249", duration: 5000 }) 
                 router.refresh()
             }
         } catch (error) {
-            toast.error('Unable to complete request, please, check your network and try again '+error, { id: "82046" })
+            toast.error('Unable to complete request, please, check your network and try again '+error, { id: "86249", duration: 5000 }) 
         }
         setLoading(false)
     }

@@ -363,12 +363,12 @@ export const courses: CoursesProps[] = [
         id: '693123',
         image: ctti_ms_chart,
         category: "Business Applications",
-        title: "Microsoft Office",
+        title: "Microsoft Suite",
         users: 89,
         rating: 4.1,
         description: "",
         // price: 770000,
-        duration: "6Months",
+        duration: "2Months",
         featured: true,
         requisite: [
             "Basic Computer Appreciation",
@@ -415,7 +415,7 @@ export const courses: CoursesProps[] = [
         rating: 4.0,
         description: "",
         // price: 770000,
-        duration: "6Months",
+        duration: "2Months",
         featured: true,
         requisite: [
             "Basic Computer Appreciation",
@@ -459,7 +459,7 @@ export const courses: CoursesProps[] = [
         rating: 4.1,
         description: "",
         // price: 770000,
-        duration: "6Months",
+        duration: "2Months",
         featured: true,
         requisite: [
             "Basic Computer Appreciation",
@@ -525,7 +525,7 @@ export const courses: CoursesProps[] = [
         rating: 4.2,
         description: "",
         // price: 210000,
-        duration: "6Months",
+        duration: "2Months",
         featured: true,
         requisite: [
             "Basic Computer Appreciation",
@@ -1090,7 +1090,7 @@ export const courses: CoursesProps[] = [
     },
     {
         id: '624292',
-        image: ctti_graphics,
+        image: ctti_graphics_design,
         category: "Design",
         title: "Graphics Design",
         users: 120,
@@ -1112,7 +1112,7 @@ export const courses: CoursesProps[] = [
     },
     {
         id: '692134',
-        image: ctti_graphics_design,
+        image: ctti_graphics,
         category: "Design",
         title: "UI/UX Design",
         users: 100,

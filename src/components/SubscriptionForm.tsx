@@ -13,13 +13,13 @@ export default function SubscriptionForm() {
             if (formRef?.current) {
                 const formData = new FormData(formRef?.current)
                 const res = await handleSubscription(formData)
-                toast.success(res.message || 'Success', { id: '8014' })
+                toast.success(res.message || 'Success', { id: "86249", duration: 5000 }) 
             }
             else {
-                toast.error('Something went wrong. Please, try again', { id: '8014' })
+                toast.error('Something went wrong. Please, try again', { id: "86249", duration: 5000 }) 
             }
         } catch (error) {
-            toast.error('Something went wrong. Please, try again', { id: '8014' })
+            toast.error('Something went wrong. Please, try again', { id: "86249", duration: 5000 }) 
         }
 
     }

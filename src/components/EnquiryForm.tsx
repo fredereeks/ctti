@@ -24,14 +24,18 @@ export default function EnquiryForm({ courses }: {courses: CoursesProps[]}) {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        toast.loading('Please wait while we send your request', { id: "82046" })
+        toast.loading('Please wait while we send your request', { id: "86249", duration: 5000 }) 
         setLoading(true)
         try {
             const formData = new FormData(formRef?.current!)
             const res = await submitEnquiry(formData)
-            res.error ? toast.error(res.message, { id: "82046" }) : toast.success(res.message, { id: "82046" })
+            if(res.error) toast.error(res.message, { id: "86249", duration: 5000 }) 
+            else{
+                toast.success(res.message, { id: "86249", duration: 5000 }) 
+                formRef?.current?.reset()
+            }
         } catch (error) {
-            toast.error('Unable to complete request, please, check your network and try again', { id: "82046" })
+            toast.error('Unable to complete request, please, check your network and try again', { id: "86249", duration: 5000 }) 
         }
         setLoading(false)
     }

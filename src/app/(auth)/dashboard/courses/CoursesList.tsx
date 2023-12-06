@@ -33,7 +33,7 @@ export default function CourseList({ coursesData }: {coursesData: CourseProps[]}
             modalRef.current?.showModal()
         }
         catch (err) {
-            toast.error(`Could not Show this Message. Check your Internet connection and try again`)
+            toast.error(`Could not Show this Message. Check your Internet connection and try again`, { id: "86249", duration: 5000 })
         }
     }
 
@@ -47,7 +47,7 @@ export default function CourseList({ coursesData }: {coursesData: CourseProps[]}
             // replyRef.current?.showModal()
         }
         catch (err) {
-            toast.error(`Could not Send your reply. Check your Internet connection and try again`)
+            toast.error(`Could not Send your reply. Check your Internet connection and try again`, { id: "86249", duration: 5000 }) 
         }
     }
 

@@ -76,7 +76,7 @@ model Course {
   contents      Json?
   status        Status       @default(Active)
   batches       Batch[]
-  enquiry       Enquiry[]
+  // enquiry       Enquiry[]
   instructorsId String?
   rating        Rating[]
   users         User?        @relation(fields: [userId], references: [id])
@@ -117,7 +117,7 @@ model Enquiry {
   country    String?
   state      String?
   status     ReadStatus @default(Unread)
-  course     Course     @relation(fields: [courseId], references: [id])
+  // course     Course     @relation(fields: [courseId], references: [id])
   courseId   String
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @default(now()) @updatedAt

@@ -13,36 +13,38 @@ import { handleContactMessage } from '@/actions';
 
 export default function ContactForm() {
     const formRef = useRef<HTMLFormElement | null>(null)
-    const [pending, setPending] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
     const [phone, setPhone] = useState<string | undefined>('')
     const [country, setCountry] = React.useState('Nigeria')
     const [region, setRegion] = React.useState('Abuja Federal Capital Territory')
 
 
-    async function handleClientSubmit(formData: FormData) {
+    async function handleClientSubmit(e: React.FormEvent) {
+        e.preventDefault()
         if (!phone && country === "Nigeria") {
-            toast.error("Sorry but we would like to have your phone number", { id: "86249" })
+            toast.error("Sorry but we would like to have your phone number", { id: "86249", duration: 5000 }) 
             return;
         }
-            setPending(true)
+            setLoading(true)
         try {
+            const formData = new FormData(formRef?.current!)
             const data = await handleContactMessage(formData);
             if (data?.error) {
-                toast.error(data?.message, { id: "86249" })
+                toast.error(data?.message, { id: "86249", duration: 5000 }) 
                 formRef?.current?.reset();
             } else {
-                toast.success(data?.message || "Message Sent", { id: "86249" })
+                toast.success(data?.message || "Message Sent", { id: "86249", duration: 5000 }) 
                 formRef?.current?.reset();
             }
         } catch (error) {
-            toast.error("Something went wrong. Please, try again", { id: "86249" })
+            toast.error("Something went wrong. Please, try again", { id: "86249", duration: 5000 }) 
         }
-        setPending(false)
+        setLoading(false)
     }
 
 
     return (
-        <form ref={formRef} action={handleClientSubmit} className="w-full flex flex-col gap-5">
+        <form ref={formRef} onSubmit={handleClientSubmit} className="w-full flex flex-col gap-5">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <h4 className="heading scale-90 text-center py-2 lg:col-span-2">We are always happy to hear from you</h4>
                 <input type="text" placeholder='First Name' name='firstname' required className="w-full outline-none placeholder-opacity-70 my-1 text-sitetext/80 focus:border-primary bg-transparent border border-zinc-200 rounded-md py-2 px-4" />
@@ -77,7 +79,7 @@ export default function ContactForm() {
                     <RegionDropdown country={country} disableWhenEmpty={true} value={region} onChange={value => setRegion(value)} name='state' key={9206} id='state' classes='hover:border-primary/90 outline-none py-2 px-4 border border-gray-300 rounded-md text-sitetext/80 text-base bg-transparent focus-within:bg-transparent focus:bg-transparent placeholder-opacity-70' />
                 </div>
                 <textarea required placeholder='' name='message' className="w-full outline-none placeholder-opacity-70 my-1 text-sitetext/80 focus:border-primary bg-transparent border border-zinc-200 rounded-md py-4 px-4 col-start-1 h-[12rem] lg:col-span-2 resize-y" ></textarea>
-                <button type="submit" disabled={pending} className="text-gray-50 bg-[#ec1c3e] rounded-[2rem] w-max px-8 py-2 text-sm md:text-md shadow-lg cursor-pointer shadow-[#ec1c3e]">{pending ? 'Processing...' : 'Send Message'}</button>
+                <button type="submit" disabled={loading} className="text-gray-50 bg-[#ec1c3e] rounded-[2rem] w-max px-8 py-2 text-sm md:text-md shadow-lg cursor-pointer shadow-[#ec1c3e]">{loading ? 'Processing...' : 'Send Message'}</button>
             </div>
         </form>
     )
