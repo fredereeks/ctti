@@ -4,12 +4,9 @@ import React, { useRef, useState } from 'react'
 import { FaCalendarAlt, FaClock } from 'react-icons/fa'
 import { TableSearch, Modal } from '@/app/(auth)/ui'
 import { courses } from '@/data'
-import moment from 'moment'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
-import { IoPeopleOutline } from 'react-icons/io5'
 import { MdQuestionAnswer } from 'react-icons/md'
-import { Course } from '@prisma/client'
 
 export default function EnquiryList({ enquiryData }: { enquiryData: EnquiryProps[] }) {
     const [allTableData, setAllTableData] = useState<EnquiryProps[] | []>(enquiryData)

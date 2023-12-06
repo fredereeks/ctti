@@ -6,33 +6,23 @@ export const metadata: Metadata = {
     description: 'At CTTI, we are committed to nurturing the next generation of IT professionals and supporting organisations in their digital transformation journeys',
   }
 // import {prisma} from "@/lib/prisma"
-import prisma from "@/lib/prisma"
 
-const fetchCourse = async() => {
-    // try {
-    //     db.query(`SELECT * FROM course`, [], (err, data) => {
-    //         if(err) console.log('Something went wrong. Unable to fetch courses')
-    //         else return data
-    //     })
-    // } catch (error) {
-    //     console.log('Something went wrong')
-    // }
-    const course = await prisma.course.findMany({
-        include: {
-            _count: {
-                select: {
-                    rating: {},
-                    enquiry: {},
-                }
-            },
-        }
-    })
-    return course
-}
+// const fetchCourse = async() => {
+//     const course = await prisma.course.findMany({
+//         include: {
+//             _count: {
+//                 select: {
+//                     rating: {},
+//                     batches: {},
+//                 }
+//             },
+//         }
+//     })
+//     return course
+// }
 
 
 export default async function BlogsPage() {
-    const courses = await fetchCourse()
     return (
         <main className='flex flex-col justify-center bg-white min-h-[60vh]'>
             <BreadCrumb page={"Blogs"} />
