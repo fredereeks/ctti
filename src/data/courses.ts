@@ -156,7 +156,7 @@ export const courses: CoursesProps[] = [
         rating: 4.3,
         description: "Students will explore the world of mobile app development in this course. They will learn about iOS and Android platforms, mobile app design principles, and user experience considerations. By the end of the course, students will be able to develop and deploy their own mobile applications.",
         // price: 189000,
-        duration: "6Months",
+        duration: "3Months",
         featured: false,
         requisite: [
             "Basic Computer Appreciation",
@@ -178,7 +178,7 @@ export const courses: CoursesProps[] = [
         rating: 4.3,
         description: "This course introduces students to software engineering principles. They will learn about software requirements engineering, documentation, and software architecture. Students will also gain exposure to various software design patterns and project management techniques, equipping them with the skills to oversee successful software projects.",
         // price: 192000,
-        duration: "6Months",
+        duration: "3Months",
         featured: false,
         requisite: [
             "Basic Computer Appreciation",
@@ -200,7 +200,7 @@ export const courses: CoursesProps[] = [
         rating: 4.3,
         description: "",
         // price: 210000,
-        duration: "6Months",
+        duration: "2Months",
         featured: false,
         requisite: [
             "Basic Computer Appreciation",
@@ -1119,7 +1119,7 @@ export const courses: CoursesProps[] = [
         rating: 4.0,
         description: "",
         // price: 145000,
-        duration: "6Months",
+        duration: "3Months",
         featured: true,
         requisite: [
             "Basic Computer Appreciation",

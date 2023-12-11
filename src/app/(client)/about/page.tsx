@@ -34,7 +34,7 @@ export default async function page() {
                         </div>
                         <div className="flex flex-col gap-2 px-4 pb-2 md:p-4 flex-1 md:flex-2">
                             <h4 className={`text-lg md:text-2xl font-bold text-primary uppercase`}>Our Approach</h4>
-                            <p className="thin-text leading-loose text-justify py-2 pr-2">We believe a holistic approach to IT training is crucial for long-term success. We offer various training options to suit different learning preferences and schedules. Whether you prefer traditional classroom instruction, virtual training from the comfort of your home, or a blended learning experience that combines the best of both worlds, we have a solution for you.</p>
+                            <p className="thin-text leading-loose text-justify py-2 pr-2">We believe a holistic approach to IT training is crucial for long-term success. We offer various training options to suit different learning preferences and schedules. Whether you prefer traditional classroom instruction, or a blended learning experience that combines the best of both worlds, we have a solution for you.</p>
                         </div>
                     </aside>
                 </div>

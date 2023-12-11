@@ -63,7 +63,7 @@ function Benefits() {
                                 <p className="text-xs md:text-sm thin-text absolute bottom-2 left-3 bg-gray-500 text-gray-200 rounded-md px-3 py-1">Benedict John</p>
                             </div>
                             <div className="flex py-1 flex-col">
-                                <button className="text-gray-200 bg-[#ec1c3e] rounded-[2rem] w-max px-3 py-2 text-sm md:text-md shadow-lg cursor-not-allowed shadow-[#ec1c3e]">End Discussion</button>
+                                {/* <button className="text-gray-200 bg-[#ec1c3e] rounded-[2rem] w-max px-3 py-2 text-sm md:text-md shadow-lg cursor-not-allowed shadow-[#ec1c3e]">End Discussion</button> */}
                             </div>
                         </aside>
                     </div>
@@ -94,7 +94,7 @@ function Benefits() {
                                 <p className="text-xs md:text sm thin-text absolute bottom-2 left-3 bg-gray-500 text-gray-200 rounded-md px-3 py-1">Frederick Jones</p>
                             </div>
                             <div className="flex py-1 flex-col">
-                                <button className="text-gray-200 bg-[#ec1c3e] rounded-[2rem] w-max px-5 py-2 text-sm md:text-md shadow-lg cursor-not-allowed shadow-[#ec1c3e]">See More</button>
+                                {/* <button className="text-gray-200 bg-[#ec1c3e] rounded-[2rem] w-max px-5 py-2 text-sm md:text-md shadow-lg cursor-not-allowed shadow-[#ec1c3e]">See More</button> */}
                             </div>
                         </aside>
                     </div>
