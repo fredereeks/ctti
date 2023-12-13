@@ -1,12 +1,9 @@
 "use client"
 
-import { categories } from '@/data';
 import { StaticImageData } from 'next/image';
 import React, { useEffect, useState, useRef } from 'react'
 import { CourseCard } from '.';
 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay } from 'swiper/modules'
 import 'swiper/css';
 
 import { motion } from "framer-motion"

@@ -26,7 +26,7 @@ export default function CourseEnquiryForm({ title, courses }: { title: string, c
                 <div className="relative">
                     <div className="py-3 mb-2 flex flex-col gap-1 bg-gray-500 px-3">
                         <h3 className="text-xl md:text-2xl font-light text-white text-center capitalize">Make Enquiry on {title}</h3>
-                        <p className="text-white text-center leading-loose text-sm">Fill out your details in the form below and we would get back to you as sooon as possible.</p>
+                        <p className="text-white text-center leading-loose text-sm">Fill out your details in the form below and we would get back to you as soon as possible.</p>
                     </div>
                     <EnquiryForm courses={courses} />
                 </div>

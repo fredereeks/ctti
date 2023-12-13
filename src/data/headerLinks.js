@@ -180,11 +180,11 @@ export const headerLinks = [
                 link: "/solutions/team-training",
                 title: "Team Training"
             },
-            {
-                id: 1145,
-                link: "/solutions/virtual-corporate-training",
-                title: "Virtual Corporate Training"
-            },
+            // {
+            //     id: 1145,
+            //     link: "/solutions/virtual-corporate-training",
+            //     title: "Virtual Corporate Training"
+            // },
             // {
             //     id: 1146,
             //     link: "/solutions/customized-courseware-development",

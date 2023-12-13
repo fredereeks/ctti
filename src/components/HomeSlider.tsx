@@ -8,7 +8,7 @@ import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 // import 'swiper/css/bundle';
 import 'swiper/css/effect-fade';
 
@@ -20,9 +20,8 @@ export default function HomeSlider() {
       // spaceBetween={50}
       // slidesPerView={3}
       // fadeEffect={}
-      // speed={8000}
       modules={[Autoplay]}
-      autoplay={true}
+      autoplay={{ delay: 8000, pauseOnMouseEnter: true, disableOnInteraction: false}}
       loop={true}
       direction='horizontal'
       effect='fade'
