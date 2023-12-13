@@ -8,7 +8,7 @@ import 'swiper/css';
 export default function ClientLayout({children}: {children: React.ReactNode}) {
     useEffect(() => {
         Aos.init({
-            duration: 3000,
+            duration: 8000,
             once: true
         })
     },[])

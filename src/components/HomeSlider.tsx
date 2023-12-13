@@ -20,6 +20,7 @@ export default function HomeSlider() {
       // spaceBetween={50}
       // slidesPerView={3}
       // fadeEffect={}
+      // speed={8000}
       modules={[Autoplay]}
       autoplay={true}
       loop={true}

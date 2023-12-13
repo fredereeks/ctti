@@ -57,7 +57,7 @@ export default async function CoursePage({ params: { category } }: CourseParams)
         </div>
       </section>
       <section className="bg-gray-50 px-4">
-        <div id="#courses" className="container max-w-screen-md relative mx-auto py-10 flex flex-col overflow-hidden">
+        <div id="#courses" className="container relative mx-auto py-10 flex flex-col overflow-hidden">
           <h3 className="py-2 px-3 border-0 border-l-[3px] border-l-primary-500 capitalize heading">{category.replaceAll("-", " ")} Courses</h3>
           <div className="col-span-1 md:col-span-3 pt-6 pb-4 grid course__wrap gap-3" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
             {

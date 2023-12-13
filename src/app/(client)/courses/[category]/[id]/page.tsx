@@ -4,7 +4,6 @@ import Image, { StaticImageData } from 'next/image'
 import React from 'react'
 import Link from 'next/link'
 import { FaCheck, FaStar } from 'react-icons/fa'
-import { IoMdCart, IoMdHeadset } from 'react-icons/io'
 // import { usePaystackPayment } from 'react-paystack';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { CourseCard } from '@/components'
@@ -12,6 +11,7 @@ import { courses } from '@/data'
 import 'react-phone-number-input/style.css'
 import { randomNumber } from '@/utils';
 import CourseEnquiryForm from '@/components/CourseEnquiryForm'
+import RelatedCourses from '@/components/RelatedCourses'
 
 
 
@@ -136,8 +136,9 @@ export default async function SingleCourse({params: {id}}: SingleCourseProps) {
         <div className="container relative mx-auto py-10 flex flex-col overflow-hidden">
           <h3 className="py-2 px-3 text-primary border-0 border-l-[3px] border-l-primary font-bold text-lg md:text-xl">Related Courses</h3>
           <div className="col-span-1 md:col-span-3 pt-6 pb-4 grid course__wrap gap-3" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
+            <RelatedCourses courses={courses.filter(course => course.category === state?.category && course.id !== state?.id)} />
             {
-              courses.filter(course => course.category === state?.category && course.id !== state?.id).slice(0, 4).reverse().map(course => <CourseCard key={course.id} {...course} />)
+              // .slice(0, 4).reverse().map(course => <CourseCard key={course.id} {...course} />)
             }
           </div>
         </div>

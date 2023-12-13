@@ -26,8 +26,9 @@ const fetchCourse = async() => {
 }
 
 export default async function CoursesPage() {
-    const coursesData: CoursesProps[] = await fetchCourses();
+    const courses: CoursesProps[] = await fetchCourses();
     const categoryData: {id: string, title: string}[] = await fetchCategories()
+    const coursesData = courses.filter(el => el.featured === true).concat(courses.filter(el => el.featured === false))
     return (
         <main className='flex flex-col justify-center bg-white'>
             <BreadCrumb key={8923} page={"Courses"} />

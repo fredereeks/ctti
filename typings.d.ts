@@ -54,7 +54,7 @@ type CourseCardProps = {
     rating: number;
     description: string;
     duration: string;
-    featured?: boolean;
+    featured?: boolean | number;
     requisite?: string[];
     contents?: string[];
     key?: string;
