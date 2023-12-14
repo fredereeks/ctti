@@ -84,7 +84,7 @@ export default function CourseList({ coursesData }: {coursesData: CourseProps[]}
         <div className="container relative mx-auto py-10 flex flex-col gap-6 overflow-hidden">
         <div className="flex justify-between items-center gap-4">
           <h3 className="py-2 px-3 text-primary border-0 border-l-[3px] border-l-primary font-bold text-lg md:text-xl">All Courses ({coursesData.length})</h3>
-          <Link href={`/dashboard/courses/create`} className='text-gray-50 bg-primary rounded-[2rem] w-max px-8 py-2 text-sm md:text-md shadow-lg cursor-pointer shadow-primary'>Add New Course</Link>
+          {/* <Link href={`/dashboard/courses/create`} className='text-gray-50 bg-primary rounded-[2rem] w-max px-8 py-2 text-sm md:text-md shadow-lg cursor-pointer shadow-primary'>Add New Course</Link> */}
         </div>
           <div className="col-span-1 md:col-span-3 grid course__wrap gap-3" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
             {

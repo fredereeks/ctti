@@ -10,12 +10,13 @@ function CategoryCard({id, icon, background, title, courses} : CategoryProps) {
         id: 3894,
         title: "Programming and Development",
         icon: <IoIosCode className='text-2xl text-primary group-hover:text-white md:text-3xl'/>,
+        background: "bg-primary/20 group-hover:bg-primary",
     },
     {
         id: 3844,
         title: "Networking and Cybersecurity",
-        icon: <FaNetworkWired className='text-2xl text-primary-500 group-hover:text-white md:text-3xl'/>,
-        background: "bg-primary-100 group-hover:bg-primary-500",
+        icon: <FaNetworkWired className='text-2xl text-red-500 group-hover:text-white md:text-3xl'/>,
+        background: "bg-red-100 group-hover:bg-red-500",
     },
     {
         id: 3828,
@@ -75,7 +76,7 @@ function CategoryCard({id, icon, background, title, courses} : CategoryProps) {
 ]
 const targetBg = categories.find(el => el.id === id)?.background
   return (
-    <Link href={`/courses/${title}`} key={id} className="bg-white flex flex-col md:flex-row items-center gap-2 p-3 sm:p-4 max-w-[25rem] group shad hover:shadow-2xl rounded-base transition-all duration-300">
+    <Link href={`/courses/${title.toLowerCase().replaceAll(" ", "-")}`} key={id} className="bg-white flex flex-col md:flex-row items-center gap-2 p-3 sm:p-4 max-w-[25rem] group shad hover:shadow-2xl rounded-base transition-all duration-300">
         <div className={`h-[70px] w-[70px] mb-2 rounded-md grid place-items-center ${targetBg}`}>
             {icon}
         </div>
