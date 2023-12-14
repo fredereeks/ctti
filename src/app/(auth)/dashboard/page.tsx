@@ -32,7 +32,7 @@ const fetchUsers = async() => {
   const admins  = await prisma.user.findMany({ where: { type: "Admin" }, orderBy: { createdAt: "desc" } })
   const users  = await prisma.user.findMany({ where: { type: "User" }, orderBy: { createdAt: "desc" } })
   const allUsers = await prisma.user.groupBy({ by: ['type'], _count: { _all: true }, })
-  const userTypes = await prisma.$queryRaw`SELECT COUNT(us.id) AS totalUsers, COUNT(ad.id) AS totalAdmins, COUNT(ins.id) AS totalInstructors FROM user us JOIN user ad JOIN user ins`;
+  // const userTypes = await prisma.$queryRaw`SELECT COUNT(us.id) AS totalUsers, COUNT(ad.id) AS totalAdmins, COUNT(ins.id) AS totalInstructors FROM user us JOIN user ad JOIN user ins`;
   // console.log({allUsers: allUsers.map(el => console.log({el})), userTypes})
   return {users, admins};
 }
