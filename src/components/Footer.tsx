@@ -49,7 +49,7 @@ const Footer = () => {
                     <div className="flex flex-1 justify-center sm:justify-end gap-2 w-full sm:w-max">
                         <Link href="/" className="hover:underline py-1 text-slate-600 mx-2 text-xs font-thin">Privacy Policy</Link>
                         <Link href="/" className="hover:underline py-1 text-slate-600 mx-2 text-xs font-thin">Cookies Policy</Link>
-                        <Link href="/" className="hover:underline py-1 text-slate-600 mx-2 text-xs font-thin">Sitemap</Link>
+                        <Link href="/sitemap.xml" className="hover:underline py-1 text-slate-600 mx-2 text-xs font-thin">Sitemap</Link>
                     </div>
                 </div>
             </div>

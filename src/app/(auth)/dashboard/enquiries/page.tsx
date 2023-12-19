@@ -5,6 +5,7 @@ import React from 'react'
 
 import EnquiryList from '@/app/(auth)/dashboard/EnquiryList';
 import prisma from '@/lib/prisma'
+import { courses } from '@/data';
 
 
 
@@ -31,8 +32,8 @@ const fetchEnquiries = async() => {
 }
 
 export default async function Dashboard() {
-  const enquiryData = await fetchEnquiries()
-  // const 
+  const enquiries = await fetchEnquiries()
+  const enquiryData: StaticEnquiryProps[] = enquiries.map((el) => ({...el, course: courses?.find(course => course.id === el.courseId)?.title}))
 
   return (
     <main className="flex flex-col gap-4 px-2 sm:px-0 pt-5 pb-10">

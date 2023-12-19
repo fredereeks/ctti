@@ -7,13 +7,15 @@ import { courses } from '@/data'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { MdQuestionAnswer } from 'react-icons/md'
+import moment from 'moment'
+import {read, utils, writeFile} from "xlsx"
 
-export default function EnquiryList({ enquiryData }: { enquiryData: EnquiryProps[] }) {
-    const [allTableData, setAllTableData] = useState<EnquiryProps[] | []>(enquiryData)
-    const [tableData, setTableData] = useState<EnquiryProps[] | []>(enquiryData)
+export default function EnquiryList({ enquiryData }: { enquiryData: StaticEnquiryProps[] }) {
+    const [allTableData, setAllTableData] = useState<StaticEnquiryProps[] | []>(enquiryData)
+    const [tableData, setTableData] = useState<StaticEnquiryProps[] | []>(enquiryData)
     const previewRef = useRef<HTMLDialogElement | null>(null)
     const inputRef = useRef<HTMLInputElement | null>(null)
-    const [selectedEnquiry, setSelectedEnquiry] = useState<EnquiryProps>()
+    const [selectedEnquiry, setSelectedEnquiry] = useState<StaticEnquiryProps>()
 
     const showPreview = (id: string) => {
         try {
@@ -35,10 +37,31 @@ export default function EnquiryList({ enquiryData }: { enquiryData: EnquiryProps
             setTableData(allTableData)
         }
         else {
-            const result = tableData.filter(el => el.firstname.toLowerCase().includes(keyword) || el.middlename?.toLowerCase().includes(keyword) || el.lastname.toLowerCase().includes(keyword) || el.email.toString().toLowerCase().includes(keyword) || el.createdAt?.toString().toLowerCase().includes(keyword) || el.phone?.toLowerCase().includes(keyword) || el.state?.toString().toLowerCase().includes(keyword) || el.country?.toString().toLowerCase().includes(keyword) || el.course?.title?.toString().toLowerCase().includes(keyword))
-            console.log({ result })
+            const result = tableData.filter(el => el.firstname.toLowerCase().includes(keyword) || el.middlename?.toLowerCase().includes(keyword) || el.lastname.toLowerCase().includes(keyword) || el.email.toString().toLowerCase().includes(keyword) || el.createdAt?.toString().toLowerCase().includes(keyword) || el.phone?.toLowerCase().includes(keyword) || el.state?.toString().toLowerCase().includes(keyword) || el.country?.toString().toLowerCase().includes(keyword) || el.course?.toString().toLowerCase().includes(keyword))
             setTableData(prev => [...result])
         }
+    }
+
+    const handleExport = async(e: React.MouseEvent) => {
+        const headings = [[`S/N`, `Full Name`, `Phone`, `Email`, `Course`, `Message`, `Date`]]
+        const data = tableData.map(({firstname, middlename, lastname, phone, email, courseId, message, createdAt},i) => {
+            // if(i === 0){
+            //     return [headings, ([
+            //         `${i + 1}`, `${firstname} ${middlename} ${lastname}`, phone, email, courses.find(course => course.id === courseId)?.title, message
+            //     , moment(createdAt).format("DD-MM-YYYY")])]
+            // }
+            return ([
+                `${i + 1}`, `${firstname} ${middlename} ${lastname}`, phone, email, courses.find(course => course.id === courseId)?.title, message
+            , moment(createdAt).format("DD-MM-YYYY")])
+        })
+        const file = [headings, ...data]
+        const wb = utils.book_new()
+        const ws = utils.json_to_sheet([])
+        // const ws = utils.json_to_sheet([])
+        utils.sheet_add_aoa(ws, headings);
+        utils.sheet_add_json(ws, data, {origin: "A2", skipHeader: true})
+        utils.book_append_sheet(wb, ws, `CTTI Enquiry List`)
+        writeFile(wb, `CTTI-Enquiries-${moment(new Date()).format("DD-MM-YYYY")}.xlsx`)
     }
 
 
@@ -52,6 +75,7 @@ export default function EnquiryList({ enquiryData }: { enquiryData: EnquiryProps
                             <tr>
                                 <th colSpan={4}>
                                     <TableSearch title='RECENT ENQUIRIES' key={'72088234'} handleSearch={handleSearch} inputRef={inputRef}>
+                                        <button onClick={handleExport} className="bg-primary text-white rounded-sm py-2 px-5 cursor-pointer hover:shadow-md hover:shadow-primary">Download Record</button>
                                     </TableSearch>
                                 </th>
                             </tr>

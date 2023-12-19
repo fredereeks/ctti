@@ -88,6 +88,8 @@ type DropdownProps = {
 
 type EnquiryProps = { id: string; firstname: string; middlename?: string | null; lastname: string; email: string; phone: string | null; message: string; country?: string | null; state?: string | null; courseId: string; createdAt?: Date | string; updatedAt?: Date | string; updatedBy?: string | null; course?: Course }
 
+type StaticEnquiryProps = { id: string; firstname: string; middlename?: string | null; lastname: string; email: string; phone: string | null; message: string; country?: string | null; state?: string | null; courseId: string; createdAt?: Date | string; updatedAt?: Date | string; updatedBy?: string | null; course?: string }
+
 type LinkCardType = {
     title: string
     link: string
