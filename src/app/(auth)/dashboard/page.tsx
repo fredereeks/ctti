@@ -38,7 +38,8 @@ const fetchUsers = async() => {
 }
 
 export default async function Dashboard() {
-  const enquiryData = await fetchEnquiries()
+  const enquiries = await fetchEnquiries()
+  const enquiryData: StaticEnquiryProps[] = enquiries.map((el) => ({...el, course: courses?.find(course => course.id === el.courseId)?.title}))
   const totalUsers = await fetchUsers()
   
  
