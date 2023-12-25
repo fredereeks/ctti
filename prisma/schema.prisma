@@ -132,7 +132,7 @@ model User {
   email       String       @unique
   phone       String       @unique
   password    String
-  image       String?
+  image       String?      @db.LongText()
   address     String?      @db.MediumText()
   country     String?
   state       String?

@@ -37,7 +37,7 @@ export default function EnquiryList({ enquiryData }: { enquiryData: StaticEnquir
             setTableData(allTableData)
         }
         else {
-            const result = tableData.filter(el => el.firstname.toLowerCase().includes(keyword) || el.middlename?.toLowerCase().includes(keyword) || el.lastname.toLowerCase().includes(keyword) || el.email.toString().toLowerCase().includes(keyword) || el.createdAt?.toString().toLowerCase().includes(keyword) || el.phone?.toLowerCase().includes(keyword) || el.state?.toString().toLowerCase().includes(keyword) || el.country?.toString().toLowerCase().includes(keyword) || el.course?.toString().toLowerCase().includes(keyword))
+            const result = tableData.filter(el => el.firstname.toLowerCase().includes(keyword) || el.middlename?.toLowerCase().includes(keyword) || el.lastname.toLowerCase().includes(keyword) || el.email.toString().toLowerCase().includes(keyword) || (el?.createdAt?.toLocaleString("en-gb", { dateStyle: "short" }))?.toLowerCase().includes(keyword) || el.phone?.toLowerCase().includes(keyword) || el.state?.toString().toLowerCase().includes(keyword) || el.country?.toString().toLowerCase().includes(keyword) || el.course?.toString().toLowerCase().includes(keyword))
             setTableData(prev => [...result])
         }
     }
@@ -48,20 +48,18 @@ export default function EnquiryList({ enquiryData }: { enquiryData: StaticEnquir
             // if(i === 0){
             //     return [headings, ([
             //         `${i + 1}`, `${firstname} ${middlename} ${lastname}`, phone, email, courses.find(course => course.id === courseId)?.title, message
-            //     , moment(createdAt).format("DD-MM-YYYY")])]
+            //     , moment(createdAt).format("MM-DD-YYYY")])]
             // }
             return ([
                 `${i + 1}`, `${firstname} ${middlename} ${lastname}`, phone, email, courses.find(course => course.id === courseId)?.title, message
-            , moment(createdAt).format("DD-MM-YYYY")])
+            , moment(createdAt).format("MM-DD-YYYY")])
         })
-        const file = [headings, ...data]
         const wb = utils.book_new()
         const ws = utils.json_to_sheet([])
-        // const ws = utils.json_to_sheet([])
         utils.sheet_add_aoa(ws, headings);
         utils.sheet_add_json(ws, data, {origin: "A2", skipHeader: true})
         utils.book_append_sheet(wb, ws, `CTTI Enquiry List`)
-        writeFile(wb, `CTTI-Enquiries-${moment(new Date()).format("DD-MM-YYYY")}.xlsx`)
+        writeFile(wb, `CTTI-Enquiries-${moment(new Date()).format("MM-DD-YYYY")}.xlsx`)
     }
 
 
@@ -112,7 +110,7 @@ export default function EnquiryList({ enquiryData }: { enquiryData: StaticEnquir
                                             </td>
                                             <td className="align-middle">
                                                 <div className="flex justify-center items-center gap-[.2rem] align-middle text-xs py-[.1rem] sm:py-1">
-                                                    <FaClock className="text-inherit mt-[.1rem]" /> <p className="">{(enquiry?.createdAt?.toLocaleString("en", { dateStyle: "long" }))}</p>
+                                                    <FaClock className="text-inherit mt-[.1rem]" /> <p className="">{(enquiry?.createdAt?.toLocaleString("en-gb", { dateStyle: "short" }))}</p>
                                                 </div>
                                             </td>
                                         </tr>

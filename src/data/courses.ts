@@ -18,6 +18,54 @@ type CoursesProps = {
 
 export const courses: CoursesProps[] = [
     {
+        id: '629112',
+        image: blog_slider2,
+        category: "Networking and Cybersecurity",
+        title: "CISCO Cyber Security Operations",
+        users: 30,
+        rating: 4.3,
+        description: "",
+        // price: 255000,
+        duration: "6Months",
+        featured: true,
+        requisite: [
+            "Install, configure and troubleshoot computers",
+            "Identify common security threats like phishing and spoofing",
+            "Problem-solving skills using both real equipments and Cisco Packet Tracer"
+        ],
+        contents: [
+            "Network concepts",
+            "Security concepts",
+            "Security monitoring",
+            "Host-based analysis",
+            "Network Intrusion analysis",
+            "Attack methods",
+            "Security policies and procedures"
+        ],
+    },
+    {
+        id: '682397',
+        image: ctti_biz_app,
+        category: "Data Science and Analytics",
+        title: "Data Analysis with Python (Basic)",
+        users: 146,
+        rating: 4.6,
+        description: "",
+        // price: 264000,
+        duration: "6Months",
+        featured: true,
+        requisite: [
+            "Basic Computer Appreciation",
+            "Quality Laptop",
+            "Unwavering Dedication to the Cause"
+        ],
+        contents: [
+            "Introduction",
+            "Package Installation",
+            "Getting Started",
+        ],
+    },
+    {
         id: '699210',
         image: mobile_apps,
         category: "Programming and Development",
@@ -334,32 +382,6 @@ export const courses: CoursesProps[] = [
         ],
     },
     {
-        id: '629112',
-        image: blog_slider2,
-        category: "Networking and Cybersecurity",
-        title: "CISCO Cyber Security Operations",
-        users: 30,
-        rating: 4.3,
-        description: "",
-        // price: 255000,
-        duration: "6Months",
-        featured: false,
-        requisite: [
-            "Install, configure and troubleshoot computers",
-            "Identify common security threats like phishing and spoofing",
-            "Problem-solving skills using both real equipments and Cisco Packet Tracer"
-        ],
-        contents: [
-            "Network concepts",
-            "Security concepts",
-            "Security monitoring",
-            "Host-based analysis",
-            "Network Intrusion analysis",
-            "Attack methods",
-            "Security policies and procedures"
-        ],
-    },
-    {
         id: '693123',
         image: ctti_ms_chart,
         category: "Business Applications",
@@ -526,28 +548,6 @@ export const courses: CoursesProps[] = [
         description: "",
         // price: 210000,
         duration: "2Months",
-        featured: true,
-        requisite: [
-            "Basic Computer Appreciation",
-            "Quality Laptop",
-            "Unwavering Dedication to the Cause"
-        ],
-        contents: [
-            "Introduction",
-            "Package Installation",
-            "Getting Started",
-        ],
-    },
-    {
-        id: '682397',
-        image: ctti_biz_app,
-        category: "Data Science and Analytics",
-        title: "Data Analysis with Python (Basic)",
-        users: 146,
-        rating: 4.6,
-        description: "",
-        // price: 264000,
-        duration: "6Months",
         featured: false,
         requisite: [
             "Basic Computer Appreciation",
@@ -988,7 +988,7 @@ export const courses: CoursesProps[] = [
         description: "",
         // price: 210000,
         duration: "6Months",
-        featured: true,
+        featured: false,
         requisite: [
             "Basic Computer Appreciation",
             "Quality Laptop",
@@ -1097,7 +1097,7 @@ export const courses: CoursesProps[] = [
         rating: 4.1,
         description: "",
         // price: 160000,
-        duration: "6Months",
+        duration: "3Months",
         featured: false,
         requisite: [
             "Basic Computer Appreciation",

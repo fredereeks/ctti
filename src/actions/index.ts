@@ -309,25 +309,34 @@ export const updateAccount = async (data: FormData) => {
     }
 }
 
+
+// DELETE ACTIONS
+export const deleteAction = async (data: FormData) => {
+    const id = data.get("deleteId")?.valueOf() as string
+    try {
+        await prisma.$transaction([
+            prisma.user.update({ where: { id }, data: {image: ""} }),
+            // prisma.contactMessage.deleteMany({ where: { OR: [{ : id, senderId: id }] } })
+        ])
+        return { error: false, message: `Image has been successfully deleted` }
+    }
+    catch (err) {
+        return { error: true, message: `Something went wrong while attempting to make your request, please, try again.` }
+    }
+    finally {
+        revalidatePath("/dashboard/profile")
+        // if (type === "Member") signOut();
+    }
+}
+
 export const handleUpload = async (data: FormData) => {
     try {
-        const file = data.get("image")?.valueOf() as File
-        let imageName;
-        if (file.size) {
-            let fileName = file?.name;
-            const extension = fileName?.split(".").pop();
-            fileName = fileName.replaceAll(" ", "-").replaceAll("_", "-").replaceAll("'", "").replaceAll("&", "").replaceAll("%", "").replaceAll("@", "").replaceAll("(", "").replaceAll(")", "");
-            imageName = `${fileName.replaceAll(`.${extension}`, "")}-${Date.now()}.${extension ?? "jpg"}`; // file.name;
-            // fileName = imageName;
-            const imagePath = path.join(`./public/users/`, imageName);
-            const imageStream = fs.createWriteStream(imagePath);
-            imageStream.write(Buffer.from(await file.arrayBuffer()));
-            imageStream.end();
-            return { error: false, message: "Image uploaded successfully." }
-        }
-        else return { error: true, message: "It appears this file is not a valid image extension. Only valid jpg, jpeg or png are allowed." }
-
+        const file = data.get("file") as string
+        const id = data.get("id") as string
+        // console.log({file, id})
+        await prisma.user.update({ where: { id }, data: { image: file } })
+        return { error: false, message: `Image Uploaded successfully` }
     } catch (error) {
-        return { error: true, message: "Something went wrong while attempting to upload your picture. Please, try again." }
+        return { error: true, message: `Something went wrong. We are unable to process handle your upload, please try again.` }
     }
 }
