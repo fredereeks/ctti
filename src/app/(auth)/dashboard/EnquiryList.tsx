@@ -187,7 +187,7 @@ export default function EnquiryList({ enquiryData }: { enquiryData: StaticEnquir
             </Modal>
             <Modal modalRef={replyRef}>
                 <div className='p-5 flex flex-col gap-4'>
-                    <span className="text-[.6rem] sm:text-[.75rem] w-full text-primary bg-primary/20 dark:bg-primary p-2 rounded-xs uppercase text-center">Reply Message {selectedEnquiry?.subject} </span>
+                    <span className="text-[.6rem] sm:text-[.75rem] w-full text-primary bg-primary/20 dark:bg-primary p-2 rounded-xs uppercase text-center">Reply Message </span>
                     <div className="w-full flex items-center gap-2">
                         {/* <h4 className="text-sm bg-slate-200/50 dark:bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-md uppercase mr-2">REPLY</h4> */}
                         <div className={`h-7 sm:h-8 w-7 sm:w-8 flex-shrink-0 flex justify-center items-center rounded-full overflow-hidden relative bg-primary dark:bg-slate-100 text-slate-100 dark:text-slate-600`}>
