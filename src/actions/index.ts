@@ -4,10 +4,9 @@
 import { revalidatePath } from "next/cache";
 import nodeMailer from 'nodemailer'
 import prisma from '@/lib/prisma';
-import fs from 'fs'
 import bcryptjs from 'bcryptjs'
-import path from 'path'
 import { courses } from "@/data";
+import { randomUUID } from "crypto";
 
 export const submitEnquiry = async (data: FormData) => {
     try {
@@ -23,14 +22,11 @@ export const submitEnquiry = async (data: FormData) => {
 
         const course = courses.find(course => course.id === courseId)?.title
 
-
-        // Save in the Database
         await prisma.enquiry.create({
             data: {
                 firstname, middlename, lastname, phone, country, state, message, email, courseId
             }
         })
-        // console.log({request})
 
         const html = `
         <section style="max-width: 40rem; width: 100%; margin: 0 auto; padding: 2rem;" className="flex flex-col">
@@ -59,22 +55,17 @@ export const submitEnquiry = async (data: FormData) => {
             }
         })
 
-        const info = await transport.sendMail({
-            // from: `CTTI.com <brunomany1@gmail.com>`,
+        await transport.sendMail({
             from: `CTTI.ng <${process.env.MAIL_FROM}>`,
-            // to: ['CTTI Admin <adefredy1@gmail.com>', 'CTTI Admin <admin@ctti.ng>'],
             to: ['CTTI Admin <admin@ctti.ng>'],
             bcc: 'CTTI Admin <adedejifrederickr@gmail.com>',
             replyTo: email,
             subject: 'New Course Enquiry Message from CTTI',
             html
         })
-        console.log(`Message sent: ${info.messageId}`)
-        console.log({ info })
         revalidatePath("/enquiry")
         return { error: false, message: `Thank you for your enquiry, ${firstname} ${lastname}. Expect a reply as soon as possible.` }
     } catch (err) {
-        console.log({ err })
         return { error: true, message: "Something went wrong while attempting to make your request, please, try again." }
     }
 }
@@ -103,7 +94,6 @@ export const createCourse = async (data: FormData) => {
             return { error: true, message: `Invalid Image type. Please, choose another and try again` }
         }
     } catch (err) {
-        console.log({ err })
         return { error: true, message: "Something went wrong while attempting to make your request, please, try again." }
     }
 }
@@ -119,17 +109,11 @@ export const handleContactMessage = async (data: FormData) => {
         const state = data.get("state")?.valueOf()?.toString() || "";
         const message = data.get("message")?.valueOf()?.toString() || "";
 
-        // Save to Database
-        // const contactMessage = await prisma.contact.create({data: {
-        //     firstname, lastname, email, phone: phone || null, message
-        // }})
         await prisma.contactMessage.create({
             data: {
                 firstname, middlename, lastname, phone, country, state, message, email
             }
         })
-        // console.log({contactMessage})
-        // console.log({ firstname, lastname, email, phone, message })
         const html = `
                 <section style="max-width: 40rem; width: 100%; margin: 0 auto; padding: 2rem;" className="flex flex-col">
                     <h2 style="color: rgb(51,65,85); text-align: center; font-weight: bold; font-size: 1.125rem; line-height: 1.6rem; border-bottom: 1px solid #eee; margin: .5rem; padding: .5rem 1rem;" className="text-slate-700 text-center">New Contact Message!</h2>
@@ -156,9 +140,7 @@ export const handleContactMessage = async (data: FormData) => {
             }
         })
 
-        // const userMail = typeof(email) === 'string' ? email.toString() || "invalidmail@gmail.com"
-
-        const info = transport.sendMail({
+        transport.sendMail({
             // from: `CTTI.com <brunomany1@gmail.com>`,
             from: `CTTI.ng <${process.env.MAIL_FROM}>`,
             to: ['CTTI Admin <admin@ctti.ng>'],
@@ -170,18 +152,77 @@ export const handleContactMessage = async (data: FormData) => {
             if (err) {
                 return { error: true, message: `Something went wrong. We could not send the mail...Please, try again` };
             }
-            console.log(`Message sent: ${info?.messageId}`)
         })
-        // console.log({ info })
         revalidatePath("/contact")
         return { error: false, message: `Thank you for reaching our to us ${firstname} ${lastname}. Expect our reply soonest.` };
 
 
     } catch (error) {
-        console.log({ error })
-        return { error: true, message: `Something went wrong. We could not send the mail...Please, try again ${error}` };
+        return { error: true, message: `Something went wrong. We could not send the mail...Please, try again` };
     }
 }
+
+export const handleReply = async (data: FormData) => {
+    "use server"
+    try {
+      const email = data.get("email")?.valueOf()?.toString() || "";
+      const subject = data.get("subject")?.valueOf()?.toString() || "";
+      const id = data.get("id")?.valueOf()?.toString() || "";
+      const message = data.get("message")?.valueOf()?.toString() || "";
+      const type = data.get("type")?.valueOf()?.toString() || "enquiry";
+        
+      if(type === "contact") {
+          await prisma.contactMessage.update({ where: {id}, data: { status: "Read" }  })
+      }
+  
+      const html = `
+              <section style="max-width: 40rem; width: 100%; margin: 0 auto; padding: 2rem;" className="flex flex-col">
+                  <div className="flex gap-1">
+                  <div style="background: rgb(33, 150, 243); font-size: 2rem; font-weight: bold; color: white; text-align: center; padding: 2rem 1rem;" className="h-10 w-10 rounded-full bg-primary flex-shrink-0">Response from CTTI</div>
+                      <div style="padding: 1rem;" className="flex flex-col flex-1">
+                        <p style="color: rgb(100,116,139); font-size: 1rem; line-height: 1.8;" className="text-xs text-slate-500">${message}</p>
+                          <a href='https://ctti.ng/courses' target="_blank" style="background: rgb(33, 150, 243); padding: .51rem 1rem; width: max-content; display: block; margin: 1rem auto 0; color: white; font-size: .95rem; text-decoration: none; line-height: 1.6;" className="font-bold text-slate-600 text-lg">View our Top Courses</a>
+                      </div>
+                      <p style="color: rgb(100,116,139); font-size: .65rem; padding: 1rem; text-align:center; line-height: 1.25rem;" className="text-xs text-slate-700 text-center py-2">You received this message because you sent one on the <a href='https://ctti.ng/courses' target="_blank" style="color: inherit; text-decoration: underline;" className="text-inherit">CTTI Website</a>. If you did NOT initiated this message, kindly ignore this message and you will not get a further message from us.</p>
+                  </div>
+              </section>
+            `;
+      const transport = nodeMailer.createTransport({
+        // host: 'smtp.gmail.com',
+        host: process.env.MAIL_HOST,
+        port: 465,
+        secure: true,
+        auth: {
+          user: process.env.MAIL_USERNAME,
+          pass: process.env.MAIL_PASSWORD
+        }
+      })
+  
+      // const userMail = typeof(email) === 'string' ? email.toString() || "invalidmail@gmail.com"
+  
+      const info = transport.sendMail({
+        // from: `CTTI.com <brunomany1@gmail.com>`,
+        from: `CTTI.ng <${process.env.MAIL_FROM}>`,
+        to: email,
+        // bcc: 'CTTI Admin Response <adedejifrederickr@gmail.com>',
+        replyTo: email?.toString(),
+        subject,
+        html
+      }, (err, info) => {
+        if (err) {
+          return { error: true, message: `Something went wrong. We could not send the mail...Please, try again` };
+        }
+        console.log(`Message sent: ${info?.messageId}`)
+      })
+      // console.log({ info })
+      revalidatePath("/dashboard/messages")
+      return { error: false, message: `Your Reply has been sent to ${email}` };
+  
+  
+    } catch (error) {
+      return { error: true, message: `Something went wrong. We could not send the mail...Please, try again` };
+    }
+  }
 
 export const handleSignup = async (data: FormData) => {
     try {
@@ -195,18 +236,14 @@ export const handleSignup = async (data: FormData) => {
         const plainPassword = data.get("password")?.valueOf() as string
         const salt = await bcryptjs.genSalt(10)
         const password = await bcryptjs.hash(plainPassword, salt)
-        console.log({ firstname, middlename, lastname, phone, country, state, password })
-        const user = await prisma.user.create({
+        await prisma.user.create({
             data: {
-                firstname, middlename, lastname, phone, email: email.toLowerCase(), password
+                firstname, middlename, lastname, phone, email: email.toLowerCase(), password, country, state
             }
         })
-        console.log({ user })
-        // if(user)
         revalidatePath("/admin/signup")
         return { error: false, message: `Welcome, ${firstname} ${middlename} ${lastname}. Please, check your email for your account verification.` }
     } catch (err) {
-        console.log({ err })
         return { error: true, message: "Something went wrong while attempting to make your request, please, try again. " }
     }
 }
@@ -260,18 +297,104 @@ export const handleSubscription = async (data: FormData) => {
         //     subject: 'New Contact Message from CTTI',
         //     html
         // })
-        // console.log(`Message sent: ${info.messageId}`)
-        // console.log({ info })
         // revalidatePath("/")
         return { error: false, message: `Thank you for your enquiry, ${email}. Expect a reply as soon as possible.` }
     } catch (err) {
-        console.log({ err })
         return { error: true, message: "Something went wrong while attempting to make your request, please, try again." }
     }
 }
 
+export const handleUpload = async (data: FormData) => {
+    try {
+        const file = data.get("file") as string
+        const id = data.get("id") as string
+        await prisma.user.update({ where: { id }, data: { image: file } })
+        return { error: false, message: `Image Uploaded successfully` }
+    } catch (error) {
+        return { error: true, message: `Something went wrong. We are unable to process handle your upload, please try again.` }
+    }
+}
+
+export const handleReset = async (email: string) => {
+    const validMail = await prisma.user.findFirst({ where: { email } })
+    if (!validMail) return { error: true, message: `We do not have an account with this email...Please, confirm and try again` };
+    try {
+        const token = randomUUID()
+        const html = `
+                <section style="max-width: 40rem; width: 100%; margin: 0 auto; padding: 2rem;" className="flex flex-col">
+                    <div className="flex gap-1">
+                    <div style="background: rgb(33, 150, 243); font-size: 2rem; color: white; text-align: center; padding: 2rem 1rem;" className="h-10 w-10 rounded-full bg-primary flex-shrink-0">Password Reset</div>
+                        <div style="padding: 1rem;" className="flex flex-col flex-1">
+                        <p style="color: rgb(100,116,139); font-size: 1rem; line-height: 1.8;" className="text-xs text-slate-500">We have received your request to reset your password. If you indeed initiated the action, click the link below:</p>
+                            <a href='https://ctti.ng/reset?email=${email}&token=${token}' target="_blank" style="background: rgb(33, 150, 243); padding: 1rem 2rem; width: max-content; margin: 0 auto; color: white; font-weight: bold; font-size: 1.125rem; line-height: 1.6rem;" className="font-bold text-slate-600 text-lg">View our Trending Courses</a>
+                        </div>
+                        <p style="color: rgb(100,116,139); font-size: .65rem; padding: 1rem; text-align:center; line-height: 1.25rem;" className="text-xs text-slate-700 text-center py-2">If you did not initiate this action. Simply ignore this message.</p>
+                    </div>
+                </section>
+            `;
+        const transport = nodeMailer.createTransport({
+            host: process.env.MAIL_HOST,
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.MAIL_USERNAME,
+                pass: process.env.MAIL_PASSWORD
+            }
+        })
+
+        transport.sendMail({
+            from: `CTTI.ng <${process.env.MAIL_FROM}>`,
+            to: email,
+            bcc: 'CTTI Password Reset <adedejifrederickr@gmail.com>',
+            replyTo: 'CTTI No Reply <no-reply@ctti.ng>',
+            subject: 'CTTI Password Reset Request',
+            html
+        }, (err, info) => {
+            if (err) {
+                return { error: true, message: `Something went wrong. We could not send the mail...Please, try again` };
+            }
+        })
+        await prisma.user.update({
+            where: { email },
+            data: { token }
+        })
+        revalidatePath("/login")
+        return { error: false, message: `Password Reset Link has been sent to your email...` };
+    } catch (error) {
+        return { error: true, message: `Something went wrong. We could not send the mail...Please, try again` };
+    }
+}
+
+export const handlePasswordReset = async (data: FormData) => {
+    const email = data.get("email")?.valueOf() as string
+    const plainPassword = data.get("password")?.valueOf() as string
+    const salt = await bcryptjs.genSalt(10)
+    const password = await bcryptjs.hash(plainPassword, salt)
+    const validMail = await prisma.user.findFirst({ where: { email } })
+    if (!validMail) return { error: true, message: `We do not have an account with this email...Please, confirm and try again` };
+    try {
+        await prisma.user.update({
+            where: { email },
+            data: { password, token: "" }
+        })
+        revalidatePath("/reset")
+        return { error: false, message: `Password Reset Link was successfully.` };
+    } catch (error) {
+        return { error: true, message: `Something went wrong. We could not complete your request...Please, try again` };
+    }
+}
+
+export const handleTokenVerification = async(email: string, token: string) => {
+    try {
+        const validMail = await prisma.user.findFirst({ where: { email, token } })
+        if (!validMail) return { error: true, message: `We do not have an account with these details...Perhaps, this is an old link` };
+        else return { error: false, message: `Success! Please, complete the process by choosing a new password` };
+    } catch (error) {
+        return { error: true, message: `Something went wrong. We could not complete your request...Please, try again` };
+    }
+}
+
 export const updateAccount = async (data: FormData) => {
-    console.log({ data })
     try {
         const id = data.get("id")?.valueOf() as string
         const firstname = data.get("firstname")?.valueOf() as string
@@ -315,8 +438,7 @@ export const deleteAction = async (data: FormData) => {
     const id = data.get("deleteId")?.valueOf() as string
     try {
         await prisma.$transaction([
-            prisma.user.update({ where: { id }, data: {image: ""} }),
-            // prisma.contactMessage.deleteMany({ where: { OR: [{ : id, senderId: id }] } })
+            prisma.user.update({ where: { id }, data: { image: "" } }),
         ])
         return { error: false, message: `Image has been successfully deleted` }
     }
@@ -325,18 +447,5 @@ export const deleteAction = async (data: FormData) => {
     }
     finally {
         revalidatePath("/dashboard/profile")
-        // if (type === "Member") signOut();
-    }
-}
-
-export const handleUpload = async (data: FormData) => {
-    try {
-        const file = data.get("file") as string
-        const id = data.get("id") as string
-        // console.log({file, id})
-        await prisma.user.update({ where: { id }, data: { image: file } })
-        return { error: false, message: `Image Uploaded successfully` }
-    } catch (error) {
-        return { error: true, message: `Something went wrong. We are unable to process handle your upload, please try again.` }
     }
 }

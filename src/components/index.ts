@@ -13,6 +13,7 @@ import LoginForm from "./LoginForm"
 import NewsCard from "./NewsCard"
 import PartnersCard from "./PartnersCard"
 import PostSkeleton from "./PostSkeleton"
+import ResetForm from "./ResetForm"
 import SideNewsCard from "./SideNewsCard"
 import SideNewsSkeleton from "./SideNewsSkeleton"
 import SignupForm from "./SignupForm"
@@ -36,6 +37,7 @@ export {
     NewsCard,
     PartnersCard,
     PostSkeleton,
+    ResetForm,
     SideNewsCard,
     SideNewsSkeleton,
     SignupForm,

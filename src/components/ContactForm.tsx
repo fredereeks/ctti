@@ -35,6 +35,9 @@ export default function ContactForm() {
             } else {
                 toast.success(data?.message || "Message Sent", { id: "86249", duration: 5000 }) 
                 formRef?.current?.reset();
+                setPhone("")
+                setCountry("Nigeria")
+                setRegion("Abuja Federal Capital Territory")
             }
         } catch (error) {
             toast.error("Something went wrong. Please, try again", { id: "86249", duration: 5000 }) 
